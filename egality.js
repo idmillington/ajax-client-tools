@@ -244,6 +244,6 @@ var e = new Egality({
         update: function() {}
     },
     transactions: {
-        type: 'list'
+        type: 'list' // ? How should this work?
     },
 });
