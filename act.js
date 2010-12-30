@@ -73,9 +73,9 @@
          * with the same name.
          */
         library: function(object, field, value, update) {
-            var current = object[field];
-            var data = value.data
-            var fieldsChanged = [];
+            var current = object[field],
+                data = value.data,
+                fieldsChanged = [];
             for (var field in data) {
                 var val = data[field];
                 // An incoming value of 'null' tells us to delete the
@@ -101,9 +101,9 @@
          * index. Note that lists don't support removal or reordering.
          */
         list: function(object, field, value, update) {
-            var current = object[field];
-            var index = value.index || 0;
-            var array = value.data;
+            var current = object[field],
+                index = value.index || 0,
+                array = value.data;
             for (var i = 0; i < array.length; i++) {
                 current[i + index] = array[i];
             }
@@ -118,8 +118,8 @@
      */
     DataStore.prototype.set = function(field, value) {
         // Set the value and notify any update.
-        var spec = this._specification[field];
-        var mutate = DataStore.mutators[spec.type];
+        var spec = this._specification[field],
+            mutate = DataStore.mutators[spec.type];
         mutate(this, field, value, spec.update);
 
         // See if we have an expiry.
@@ -172,8 +172,8 @@
      * has expired.
      */
     DataStore.prototype._processExpired = function() {
-        var expiryData;
-        var now = (new Date().valueOf()) * 0.001;
+        var expiryData,
+            now = (new Date().valueOf()) * 0.001;
 
         // Notify each elapsed element in the sequence that it is being
         // expired.
@@ -352,8 +352,8 @@
         // nav).
         var that = this;
         setInterval(function() {
-            var newHash = window.location.hash;
-            var newView = newHash.substring(1);
+            var newHash = window.location.hash,
+                newView = newHash.substring(1);
             if (newView != that.currentView) {
                 that._view(newView);
             }
@@ -366,8 +366,8 @@
             // the prepare function throws one).
             event.preventDefault();
             event.stopPropagation();
-            var newHash = $(this).attr('href');
-            var newView = newHash.substring(1);
+            var newHash = $(this).attr('href'),
+                newView = newHash.substring(1);
             if (newView != that.currentView) {
                 that._view(newView);
             }
