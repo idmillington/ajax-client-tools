@@ -11,8 +11,9 @@ merge templating function would be more widely useful, as will the
 PageManager.
 
 It is provided open-source (under the MIT license) not because I think
-it is terribly useful, but because I have no need to keep it
-proprietary.
+it is terribly useful, complete, tested or bug-free, but because I
+have no need to keep it proprietary, and no desire to use up a paid
+github private repo!
 
 Minification
 ------------
