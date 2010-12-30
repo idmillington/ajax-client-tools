@@ -1,0 +1,27 @@
+Ajax Client Tools
+=================
+
+A library of reusable tools that make building Ajax UIs for
+JSON-based webservices simpler.
+
+This library is likely to be of little use to anyone who can't control
+the format of the JSON that comes from their services. It matches the
+idioms I use on my projects. Particularly for the DataStore class. The
+merge templating function would be more widely useful, as will the
+PageManager.
+
+It is provided open-source (under the MIT license) not because I think
+it is terribly useful, but because I have no need to keep it
+proprietary.
+
+Minification
+------------
+
+I use the Google closure compiler for minification. My command line
+(from within the repo) is:
+
+$ java -jar ~/.local/jar/compiler.jar --js act.js --js_output_file act.min.js
+
+Yours will depend where you put compiler.jar
+
+
