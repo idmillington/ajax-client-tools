@@ -20,7 +20,7 @@ Minification
 I use the Google closure compiler for minification. My command line
 (from within the repo) is:
 
-$ java -jar ~/.local/jar/compiler.jar --js act.js --js_output_file act.min.js
+$ java -jar ~/.local/jar/compiler.jar --js lib/act.js --js_output_file lib/act.min.js
 
 Yours will depend where you put compiler.jar
 
