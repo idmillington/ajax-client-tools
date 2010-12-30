@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>test-liberty</title>
+  <style type="text/css" media="screen">
+    .red {
+      background: #f99;
+    }
+    .italic {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <ul id="nav">
+    <li><a href="#one">One</a></li>
+    <li><a href="#two">Two</a></li>
+    <li><a href="#three">Three</a></li>
+  </ul>
+  <div id="one">
+    <p class="loading">Loading one...</p>
+  </div>
+  <div id="two">
+    <p class="loading">Loading two...</p>
+  </div>
+  <div id="three">
+    <p class="loading">Final Three</p>
+  </div>
+  
+  <div id="library" style="display:none">
+    <p id="one-final">Final One</p>
+    <p id="two-final">Final Two</p>
+  </div>
+  
+  <script src="jquery-1.4.4.min.js" type="text/javascript" charset="utf-8">
+  </script>
+  <script src="fraternity.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+  var f = new Fraternity({
+    one: {
+      display: {
+        show: "#one, #nav",
+        hide: "#two, #three"
+      },
+      content: {
+        target: "#one",
+        source: "#library #one-final"
+      }
+    },
+    two: {
+      display: {
+        show: "#two, #nav",
+        hide: "#one, #three"
+      },
+      prepare: function(callback) { setTimeout(callback, 1000); },
+      content: {
+        target: "#two",
+        source: "#library #two-final"
+      }
+    },
+    three: {
+      display: function() {
+        $("#one, #two, #nav").fadeOut('slow', function() {
+          $("#three").fadeIn('slow');
+        });
+      },
+      prepare: function(callback) { setTimeout(callback, 1000); },
+    },
+    _start: "one"
+  });
+  </script>
+</body>
+</html>
