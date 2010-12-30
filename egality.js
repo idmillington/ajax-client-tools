@@ -89,10 +89,10 @@ Egality.mutators = {
     },
 
     /*
-     * Lists can page in sets of data, based on a given index. The value
-     * may have an index field, as well as its data, in which case it 
-     * starts setting the list data from that given index. Note that lists
-     * don't support removal or reordering.
+     * Lists can page in sets of data, based on a given index. The
+     * value may have an index field, as well as its data, in which
+     * case it starts setting the list data from that given
+     * index. Note that lists don't support removal or reordering.
      */
     list: function(object, field, value, update) {
         var current = object[field];
@@ -107,8 +107,8 @@ Egality.mutators = {
 };
 
 /*
- * Sets the value of the given field, in accordance with its specification.
- * This is usually done based on incoming data.
+ * Sets the value of the given field, in accordance with its
+ * specification.  This is usually done based on incoming data.
  */
 Egality.prototype.set = function(field, value) {
     // Set the value and notify any update.
@@ -131,12 +131,13 @@ Egality.prototype.set = function(field, value) {
 };
 
 /**
- * Makes sure that the expiry data, and its corresponding timeout, are valid
- * for the current state of the expiry in the specifications (i.e. you only 
- * need to modify the specification). This could be made more efficient if 
- * we did some of this incrementally as the data changes, but typically the 
- * cost of an expiry (i.e. an Ajax request) is so much more than the sorting 
- * and traversing we do here, it isn't worth it.
+ * Makes sure that the expiry data, and its corresponding timeout, are
+ * valid for the current state of the expiry in the specifications
+ * (i.e. you only need to modify the specification). This could be
+ * made more efficient if we did some of this incrementally as the
+ * data changes, but typically the cost of an expiry (i.e. an Ajax
+ * request) is so much more than the sorting and traversing we do
+ * here, it isn't worth it.
  */
 Egality.prototype._validateExpiry = function() {
     // Recompile the sequence
@@ -155,18 +156,21 @@ Egality.prototype._validateExpiry = function() {
         return a.expires - b.expires;
     });
 
-    // See if we need to process any items at the head of the sequence.
+    // See if we need to process any items at the head of the
+    // sequence.
     this._processExpired();
 };
 
 /*
- * This is called when the timer discovers that a field's value has expired.
+ * This is called when the timer discovers that a field's value has
+ * expired.
  */
 Egality.prototype._processExpired = function() {
     var expiryData;
     var now = (new Date().valueOf()) * 0.001;
 
-    // Notify each elapsed element in the sequence that it is being expired.
+    // Notify each elapsed element in the sequence that it is being
+    // expired.
     for (; this._expirySequence.length > 0;) {
         expiryData = this._expirySequence[0];
         if (expiryData.expires <= now) {

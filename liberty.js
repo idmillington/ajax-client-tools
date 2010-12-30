@@ -1,7 +1,7 @@
 /**
  * A declarative template system for javascript with jquery.
  */
- 
+
 /**
  * Puts the given data into the marked locations in the given dom.
  */
@@ -10,7 +10,7 @@ var merge = function(dom, data) {
     // Dispatches the value for processing, based on its type.
     var process = function(element, value, inObject) {
         var $element = $(element);
-        
+
         if (value === undefined || value === null) {
             // Ignore
         } else if (typeof value == 'object') {
@@ -34,13 +34,13 @@ var merge = function(dom, data) {
             $element.html(value);
         }
     };
-    
+
     // Merges the given array of data into the given element.
     var processArray = function(element, array) {
         var $element = $(element);
         $element.empty();
         if (array.length <= 0) return;
-        
+
         var sort = $element.attr('data-sort');
         if (sort) {
             // Take an array copy and sort it.
@@ -53,7 +53,7 @@ var merge = function(dom, data) {
             });
             array = newArray;
         }
-        
+
         // Find the item we're going to repeat for each child.
         var template = $($element.attr('data-item'));
         for (var i = 0; i < array.length; i++) {
@@ -63,9 +63,9 @@ var merge = function(dom, data) {
             $element.append(item);
         }
     };
-    
-    // Insert data from the given data structure recursively into the given 
-    // element.
+
+    // Insert data from the given data structure recursively into the
+    // given element.
     var processObject = function(element, data) {
         var $element = $(element);
 
@@ -80,7 +80,7 @@ var merge = function(dom, data) {
                 processObject(this, data);
             });
         }
-        
+
         // Add any css-classes.
         var css = $element.attr('data-classes');
         if (css) {
@@ -89,13 +89,13 @@ var merge = function(dom, data) {
                 $element.attr('class', cssValue+' '+$element.attr('class'));
             }
         }
-        
+
         // Show or hide based on a value.
         var show = $element.attr('data-show');
         if (show) {
             $element.toggle(data[show]);
         }
     };
-    
+
     $(dom).each(function() { process(this, data); });
 };

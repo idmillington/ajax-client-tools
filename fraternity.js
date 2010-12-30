@@ -4,10 +4,10 @@
 var Fraternity = function(structure, start) {
     this.structure = structure;
     this.currentHash = window.location.hash;
-    
+
     // Find where to start.
     this._view(this._hash2view(this.currentHash));
-    
+
     // Listen for hash changes made directly (or through history nav).
     var that = this;
     setInterval(function() {
@@ -17,12 +17,12 @@ var Fraternity = function(structure, start) {
             that._view(newView);
         }
     }, 250);
-    
+
     // And shortcut that process if we have a click.
     $('a[href^="#"]').click(function(event) {
-        // We explicitly do this (even though returning false), in case the
-        // _view method throws an error (hich it will if the prepare function
-        // throws one).
+        // We explicitly do this (even though returning false), in
+        // case the _view method throws an error (hich it will if the
+        // prepare function throws one).
         event.preventDefault();
         event.stopPropagation();
         var newHash = $(this).attr('href');
@@ -59,33 +59,34 @@ Fraternity.prototype._view = function(showView) {
         window.location.hash = this.currentHash;
         return;
     }
-    
+
     // Hide the elements we're removing.
     var display = viewData.display;
-    if (typeof display == 'function' || 
+    if (typeof display == 'function' ||
         (typeof display == 'object' && display.constructor == Function)) {
         display();
     } else {
         $(display.hide).hide();
         $(display.show).show();
     }
-    
+
     // Change the URL hash.
     this.currentView = showView;
     if (this._hash2view(window.location.hash) != showView) {
         window.location.hash = this.currentHash = this._view2hash(showView);
     }
-    
+
     // The complete function finishes off merging the content, if required.
     var complete;
     if (viewData.content) {
         complete = function() {
-            // Store the original content, if we have it. This will be used
-            // pre-preparation from now on. It is usually a loading message.
+            // Store the original content, if we have it. This will be
+            // used pre-preparation from now on. It is usually a
+            // loading message.
             if (viewData.originalContent === undefined) {
                 viewData.originalContent = $(viewData.content.target).html();
             }
-            
+
             // Write in the new content.
             var content = $(viewData.content.source).clone().removeAttr('id');
             $(viewData.content.target).html(content);
@@ -94,7 +95,8 @@ Fraternity.prototype._view = function(showView) {
 
     // Run the prepare function before completing.
     if (viewData.prepare) {
-        // Before we prepare, set the original content (usually a loading msg).
+        // Before we prepare, set the original content (usually a
+        // loading msg).
         if (viewData.originalContent !== undefined) {
             $(viewData.content.target).html(viewData.originalContent);
         }
